@@ -21,18 +21,6 @@ app.engine("handlebars",exphbs({defaultLayout:"main"}));
 app.set("view engine","handlebars");
 
 
-
-
-//database configuration
-var databaseUrl="scraper";
-var collections=["scrapedData"];
-
-//hook mongojs config to the db variable
-var db=mongojs(databaseUrl,collections);
-db.on("error",function(error){
-    console.log("Database Error:", error);
-})
-
 var routes=require("./controllers/scrape_controller.js");
 app.use(routes);
 

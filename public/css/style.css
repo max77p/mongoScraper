@@ -1,0 +1,50 @@
+.jumbotron{
+    background-image:url(../img/codebackground.jpeg);
+    background-size:cover;
+    background-repeat:no-repeat;
+   opacity:0.9;
+    height:30em;
+    z-index:-1;
+}
+
+.jumbotron{
+    display:flex;
+    justify-content: center;
+}
+.centerTitle h1,p{
+    display:block;
+    font-weight:bold !important;
+    color:black;
+    z-index:10;
+    font-size:5em;
+    opacity:1;
+}
+
+.centerTitle p{
+    text-align:center;
+}
+
+.articleList{
+    border:1px solid black;
+    text-overflow: hidden;
+    overflow:hidden;
+}
+.btns,.title,.two{
+    border:1px solid blue;
+}
+.title,.two{
+    width:60%;
+    overflow:hidden;
+    padding:1em;
+}
+.btns{
+    display:flex;
+    justify-content: space-between;
+}
+.one{
+    display:flex;
+    justify-content: space-between;
+    width:100%;
+    border-bottom:1px solid black;
+    background-color:lightblue;
+}

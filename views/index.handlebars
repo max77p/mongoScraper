@@ -1,0 +1,37 @@
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Mongo Scraper</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/saved">Saved Articles</a>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link scrapeBtn">SCRAPE NEW ARTICLES</button>
+        </li>
+    </ul>
+</div>
+
+<div class="jumbotron">
+    <div class="centerTitle">
+        <h1 class="display-4 scrapeTech">Mongo Scraper</h1>
+        <p class="lead scrapeInfo">Reddit's Javascript Edition</p>
+    </div>
+</div>
+
+
+<div class="articleSection container">
+    {{#each stuff}}
+        <div class="articleList" data-id= {{this._id}}>
+            <div class="one">
+                <div class="title"><span>{{this.title}}</span></div>
+                <div class="btns"><button class="saveBtn">Save Article</div>
+            </div>
+            <div class="two"><a href="{{this.link}}">{{this.link}}</a></div>
+        </div>
+    {{/each}}
+</div>
+
