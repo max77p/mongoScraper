@@ -3,7 +3,7 @@ var router = express.Router();
 var cheerio = require("cheerio");
 var request = require("request");
 var db = require("../models/db.js");
-var ObjectId=require('mongodb').ObjectID;
+var ObjectId = require("mongodb").ObjectID;
 
 router.get("/scrape", function(req, res) {
   request("https://old.reddit.com/r/javascript/hot/", function(
@@ -80,18 +80,65 @@ router.get("/", function(req, res) {
   // Find all results from the scrapedData collection in the db
 });
 
-router.delete("/scrapeapi/:id", function(req, res) {
-  var id =req.params.id;
-  db.scrapedData.remove({"_id":ObjectId(id)},function(error,found){
+router.get("/saved", function(req, res) {
+  db.savedData.find({}, function(error, found) {
+    var getresults = {};
     // Throw any errors to the console
     if (error) {
-        console.log(error);
-      }
-      // If there are no errors, send the data to the browser as json
-      else {
-          console.log(found);
-      }
+      console.log(error);
+      res.render("saved");
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      getresults = {
+        stuff: found
+      };
+      console.log(found);
+      //   console.log(getresults);
+      res.render("saved", getresults);
+    }
+  });
+  // Find all results from the scrapedData collection in the db
+});
+
+router.delete("/saved/:id", function(req, res) {
+  var id = req.params.id;
+  db.savedData.remove({ _id: ObjectId(id) }, function(error, found) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      console.log(found);
+    }
   });
 });
 
+router.get("/saved/:id", function(req, res) {
+  var id = req.params.id;
+  db.scrapedData.findOne({ _id: ObjectId(id) }, function(error, found) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      console.log(found);
+      db.savedData.save(
+        { _id: ObjectId(id), title: found.title, link: found.link },
+        function(error, data1) {
+          // Throw any errors to the console
+          if (error) {
+            console.log(error);
+          }
+          // If there are no errors, send the data to the browser as json
+          else {
+            console.log("done");
+          }
+        }
+      );
+    }
+  });
+});
 module.exports = router;

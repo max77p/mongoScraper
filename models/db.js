@@ -2,7 +2,7 @@
 var mongojs=require("mongojs");
 //database configuration
 var databaseUrl="scraper";
-var collections=["scrapedData"];
+var collections=["scrapedData","savedData"];
 
 //hook mongojs config to the db variable
 var db=mongojs(databaseUrl,collections);
