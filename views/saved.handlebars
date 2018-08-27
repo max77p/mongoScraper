@@ -28,9 +28,38 @@
         <div class="articleList" data-id= {{this._id}}>
             <div class="one">
                 <div class="title"><span>{{this.title}}</span></div>
-                <div class="btns"><button class="articleBtn" data-id= {{this._id}}>Article Notes</button><button class="dleteBtn" data-id={{this._id}}>Delete from saved</button></div>
+                <div class="btns"><button type="button" class="articleBtn btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
+                        data-id={{this._id}}>Article Notes</button><button class="dleteBtn" data-id= {{this._id}}>Delete from
+                        saved
+                    </button></div>
             </div>
             <div class="two"><a href="{{this.link}}">{{this.link}}</a></div>
         </div>
     {{/each}}
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notes for Article</h4>
+            </div>
+            <div class="modal-body">
+                <div class="currentNotes">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default saveNote" data-dismiss="modal">SAVE NOTE</button>
+            </div>
+        </div>
+
+    </div>
 </div>

@@ -1,3 +1,11 @@
+.container ul{
+    display:flex;
+    flex-direction: row;
+}
+
+
+
+
 .jumbotron{
     background-image:url(../img/codebackground.jpeg);
     background-size:cover;

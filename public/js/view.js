@@ -34,3 +34,50 @@ $(document).on("click", ".saveBtn", function(e) {
     console.log(data);
   });
 });
+
+$(document).on("click", ".articleBtn", function(e) {
+  e.preventDefault();
+  $('.currentNotes').empty();
+  var thisId = $(this).data("id");
+  console.log("thisid is");
+  console.log(thisId);
+  // When you click the savenote button
+  $(".modal-title").html("Notes for Article: " + thisId);
+  $.ajax({
+    method: "GET",
+    url: "/saved/notes/" + thisId
+  }).then(function(data) {
+    console.log("*****");
+    console.log(data);
+    showNotes(data);
+  });
+
+  $(document).on("click", ".saveNote", function() {
+      console.log("#$#$#$#");
+    console.log(thisId);
+    console.log("@#!#!@#");
+    // Run a POST request to change the note, using what's entered in the inputs
+    $.ajax({
+      method: "POST",
+      url: "/saved/notes/" + thisId,
+      data: {
+        body: $("#message-text").val()
+      }
+    }).then(function(data) {
+      // Log the response
+      console.log(data);
+    });
+    $("#message-text").val("");
+  });
+});
+
+
+var showNotes=(elData)=>{
+    var test=[...elData[0].note];
+    for(el in test){
+        console.log(test[el]);
+        console.log(test[el].body);
+        var div=$('<div class="indiNote">').append($('<span>')).html(test[el].body);
+        $('.currentNotes').append(div);
+    }
+};
