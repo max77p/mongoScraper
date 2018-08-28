@@ -50,7 +50,7 @@ $(document).on("click", ".articleBtn", function(e) {
   }).then(function(data) {
     console.log("*****");
     console.log(data);
-    showNotes(data);
+    showNotes(data,thisId);
   });
 });
 
@@ -75,10 +75,10 @@ $(document).on("click", ".saveNote", function(e) {
   $("#message-text").val("");
 });
 
-var showNotes = elData => {
+var showNotes = (elData,elId) => {
   //render notes when article notes is clicked
   var test = [...elData[0].messages];
-  console.log(test);
+//   console.log(test);
   for (el in test) {
     // console.log(test[el]);
     // console.log(test[el].note);
@@ -86,22 +86,21 @@ var showNotes = elData => {
     var div = $('<div class="indiNote">')
       .append($("<span>"))
       .html(test[el].note.body)
-      .append($('<button type="button" class="dleteNote">&times;</button>'))
-      .attr("data-id", test[el].id1);
+      .append($('<button type="button" class="dleteNote" data-dismiss="modal">&times;</button>').attr("data-mainid",elId).attr("data-specificId",test[el].id1));
     $(".currentNotes").append(div);
   }
 };
 
-$(document).on("click", ".dleteNotes", function(e) {
+$(document).on("click", ".dleteNote", function(e) {
   e.preventDefault();
-  var _id = $(this).data("id");
-  console.log(_id);
+  e.stopPropagation();
+  var mainid = $(this).data("mainid");
+  var specid=$(this).data("specificid");
+  console.log(specid);
 
-  $.ajax("/saved/" + _id, {
-    type: "DELETE"
+  $.ajax("/saved/notes/"+mainid+"/"+specid, {
+    type: "PUT"
   }).then(function(data) {
     console.log(data);
-    // Reload the page to get the updated list
   });
-  $(".articleSection").load(" .articleSection > *");
 });

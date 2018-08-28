@@ -103,6 +103,8 @@ router.get("/saved", function(req, res) {
 
 router.delete("/saved/:id", function(req, res) {
   var id = req.params.id;
+  console.log("delete id");
+  console.log(id);
   db.savedData.remove({ _id: ObjectId(id) }, function(error, found) {
     // Throw any errors to the console
     if (error) {
@@ -110,7 +112,15 @@ router.delete("/saved/:id", function(req, res) {
     }
     // If there are no errors, send the data to the browser as json
     else {
-      console.log(found);
+      db.Note.remove({_id:id},function(err,removed){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(removed);
+        }
+
+      });
     }
   });
 });
@@ -193,4 +203,23 @@ router.post("/saved/notes/:id", function(req, res) {
   );
 });
 
+router.put("/saved/notes/:mainid/:specid", function(req, res) {
+  var id = req.params.mainid;
+  var id2=req.params.specid;
+  console.log(id2);
+  db.Note.update({},{$pull:{messages:{id1:ObjectId(id2)}}},{multi:true}, function(error, removed) {
+    // Throw any errors to the console
+    if (error) {
+      console.log(error);
+    }
+    // If there are no errors, send the data to the browser as json
+    else {
+      console.log(removed);
+      res.json(removed);
+    }
+  });
+});
+
 module.exports = router;
+
+
