@@ -56,3 +56,7 @@
     border-bottom:1px solid black;
     background-color:lightblue;
 }
+
+.currentNotes{
+    padding:1em;
+}

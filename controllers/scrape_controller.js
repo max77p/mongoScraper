@@ -143,7 +143,6 @@ router.get("/saved/:id", function(req, res) {
   });
 });
 
-
 router.get("/saved/notes/:id", function(req, res) {
   var id = req.params.id;
   console.log("get notes id");
@@ -156,7 +155,14 @@ router.get("/saved/notes/:id", function(req, res) {
     // If there are no errors, send the data to the browser as json
     else {
       console.log("after savedmatch");
-     res.json(found);
+      console.log(found);
+      if (found.length > 0) {
+        res.json(found);
+      }
+      else{
+        console.log("nothing found");
+      }
+
       // if(found.notes){
       // results=[...found.notes];
       // }
@@ -168,32 +174,23 @@ router.post("/saved/notes/:id", function(req, res) {
   //save notes here
   console.log("id for note save");
   console.log(req.params.id);
-  var noteid=req.params.id;
+  var noteid = req.params.id;
   // Create a new note and pass the req.body to the entry
-  db.Note.update({ _id:noteid},{$push:{note:req.body}},{upsert:true}, function(err, inserted) {
-    if (err) {
-      // Log the error if one is encountered during the query
-      console.log(err);
-    } else {
-      console.log("TETSTSTS");
-      console.log(inserted);
-      // db.savedData.findAndModify(
-      //   {
-      //     query: { _id: ObjectId(req.params.id) },
-      //     update: { $push: { notes: inserted._id } }
-      //   },
-      //   function(err, data1) {
-      //     if (err) {
-      //       console.log(err);
-      //     }
-      //     // If there are no errors, send the data to the browser as json
-      //     else {
-      //       console.log(data1);
-      //     }
-      //   }
-      // );
+  db.Note.update(
+    { _id: noteid },
+    { $push: { messages: { id1: ObjectId(), note: req.body } } },
+    { upsert: true },
+    function(err, inserted) {
+      if (err) {
+        // Log the error if one is encountered during the query
+        console.log(err);
+      } else {
+        console.log("TETSTSTS");
+        console.log(inserted);
+        res.redirect("/saved");
+      }
     }
-  });
+  );
 });
 
 module.exports = router;
