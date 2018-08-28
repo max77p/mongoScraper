@@ -1,5 +1,6 @@
-<div class="container">
-    <ul class="nav">
+<div class="mainNav">
+    <div class="container">
+    <ul class="nav navbarStyle">
         <li class="nav-item">
             <a class="nav-link active">Mongo Scraper</a>
         </li>
@@ -9,10 +10,11 @@
         <li class="nav-item">
             <a class="nav-link" href="/saved">Saved Articles</a>
         </li>
-        <li class="nav-item">
+        {{!-- <li class="nav-item">
             <button class="nav-link scrapeBtn">SCRAPE NEW ARTICLES</button>
-        </li>
+        </li> --}}
     </ul>
+    </div>
 </div>
 
 <div class="jumbotron">
@@ -28,8 +30,8 @@
         <div class="articleList" data-id= {{this._id}}>
             <div class="one">
                 <div class="title"><span>{{this.title}}</span></div>
-                <div class="btns"><button type="button" class="articleBtn btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
-                        data-id={{this._id}}>Article Notes</button><button class="dleteBtn" data-id= {{this._id}}>Delete from
+                <div class="btns"><button type="button" class="articleBtn btn btn-info" data-toggle="modal" data-target="#myModal"
+                        data-id={{this._id}}>Article Notes</button><button type="button" class="btn btn-danger dleteBtn" data-id= {{this._id}}>Delete from
                         saved
                     </button></div>
             </div>

@@ -119,7 +119,6 @@ router.delete("/saved/:id", function(req, res) {
         else{
           console.log(removed);
         }
-
       });
     }
   });
