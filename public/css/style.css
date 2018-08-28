@@ -10,6 +10,12 @@
 
 }
 
+.indiNote{
+    display:flex;
+    justify-content: space-between;
+    padding:.5em;
+}
+
 
 .container ul{
     display:flex;

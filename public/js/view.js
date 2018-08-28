@@ -86,7 +86,7 @@ var showNotes = (elData,elId) => {
     var div = $('<div class="indiNote">')
       .append($("<span>"))
       .html(test[el].note.body)
-      .append($('<button type="button" class="dleteNote" data-dismiss="modal">&times;</button>').attr("data-mainid",elId).attr("data-specificId",test[el].id1));
+      .append($('<button type="button" class="dleteNote btn btn-danger" data-dismiss="modal">&times;</button>').attr("data-mainid",elId).attr("data-specificId",test[el].id1));
     $(".currentNotes").append(div);
   }
 };
